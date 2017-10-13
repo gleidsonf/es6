@@ -21,7 +21,30 @@ class Message {
   }
 }
 
+class ImageMessage extends Message {
+  constructor(text = '', created = Date.now(), 
+              url = '', thumbnail = '') {
+    super(text, created);
+    this.url = url;
+    this.thumbnail = thumbnail;
+  }
+  
+  toString() {
+    return `Photo${super.toString()} ` +
+            ` - Url: ${this.url} ` +
+            ` Thumbnail: ${this.thumbnail}`;
+  }
+}
+
 var emptyMessage = new Message();
 var textMessage = new Message('Yesterday message', Date.now() - 84600);
+var photoMessage = new ImageMessage('Texto', Date.now() - 84600, 'url_da_photo', 'url_of_thumbnail');
+
 console.log(String(emptyMessage));
 console.log(String(textMessage));
+console.log(String(photoMessage));
+
+console.log(emptyMessage instanceof Message);
+console.log(textMessage instanceof Message);
+console.log(photoMessage instanceof Message);
+console.log(photoMessage instanceof ImageMessage);
